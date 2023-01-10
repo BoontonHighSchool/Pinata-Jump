@@ -1,11 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://SerapeBKG.png" type="Texture" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Main.gd" type="Script" id=3]
+[ext_resource path="res://Platform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://BigPatform.tscn" type="PackedScene" id=5]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 3 )
+platformList = [ ExtResource( 4 ), ExtResource( 5 ) ]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -14,6 +17,7 @@ motion_mirroring = Vector2( 0, 512 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2( 0, -512 )
+scale = Vector2( 2, 1 )
 texture = ExtResource( 1 )
 centered = false
 

@@ -3,6 +3,7 @@ extends Node2D
 onready var width: = get_viewport_rect().size.x
 onready var height: = get_viewport_rect().size.y
 
+export(Array, PackedScene) var platformList
 var platform: = preload("res://Platform.tscn")
 
 var platformCount: = 5
@@ -14,10 +15,11 @@ var scrollSpeed = 0.05
 onready var background:Sprite = $"ParallaxBackground/ParallaxLayer/Sprite"
 
 func _ready()->void:
+	randomize()
 	OS.center_window()
 	player.global_position.y = treshold
 	for i in platformCount:
-		var inst: = platform.instance()
+		var inst = platform.instance()
 		inst.global_position.y = height / platformCount * i
 		inst.global_position.x = rand_x()
 		platformParent.add_child(inst)
@@ -30,6 +32,7 @@ func rand_x()->float:
 	return rand_range(28.0, width-28.0)
 
 func _physics_process(delta:float)->void:
+	platform = platformList[randi() % platformList.size()]
 	if player.global_position.y < treshold:
 		var move:float = lerp(0.0, treshold -player.global_position.y, scrollSpeed)
 		move_background(move)
