@@ -32,7 +32,11 @@ func rand_x()->float:
 	return rand_range(28.0, width-28.0)
 
 func _physics_process(delta:float)->void:
-	platform = platformList[randi() % platformList.size()]
+	if player.position.x > width:
+		player.position.x = 0
+	if player.position.x < 0:
+		player.position.x = width
+#	player.global_position.x = wrapf(position.x, 0, width)
 	if player.global_position.y < treshold:
 		var move:float = lerp(0.0, treshold -player.global_position.y, scrollSpeed)
 		move_background(move)
@@ -42,6 +46,8 @@ func _physics_process(delta:float)->void:
 			if plat.global_position.y > height:
 				plat.global_position.y -= height
 				plat.global_position.x = rand_x()
+#				add in platform randomize?
+				platform = platformList[randi() % platformList.size()]
 	if player.global_position.y > height:
 		game_over()
 
