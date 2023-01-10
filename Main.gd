@@ -36,7 +36,7 @@ func _physics_process(delta:float)->void:
 		player.position.x = 0
 	if player.position.x < 0:
 		player.position.x = width
-#	player.global_position.x = wrapf(position.x, 0, width)
+
 	if player.global_position.y < treshold:
 		var move:float = lerp(0.0, treshold -player.global_position.y, scrollSpeed)
 		move_background(move)
